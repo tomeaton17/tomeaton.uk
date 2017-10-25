@@ -1,4 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://tomeaton.uk/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://tomeaton.uk/blog/" rel="alternate" type="text/html" /><updated>2017-10-23T11:22:03+02:00</updated><id>http://tomeaton.uk/blog/</id><title type="html">Tom Eaton’s Weblog.</title><subtitle>Tom Eaton's Weblog. Random technical articles on things that I find interesting.</subtitle><entry><title type="html">Environment variables with Python</title><link href="http://tomeaton.uk/blog/jekyll/update/2017/10/20/Environment-variables-with-Python.html" rel="alternate" type="text/html" title="Environment variables with Python" /><published>2017-10-20T11:56:35+02:00</published><updated>2017-10-20T11:56:35+02:00</updated><id>http://tomeaton.uk/blog/jekyll/update/2017/10/20/Environment-variables-with-Python</id><content type="html" xml:base="http://tomeaton.uk/blog/jekyll/update/2017/10/20/Environment-variables-with-Python.html">&lt;p&gt;When working with APIs, an ‘API token’ or ‘key’ is often required to use the API. If you are working with these files locally this is not an issue, as long as your machine is secure. However, if you are using a version control system like &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; (which you should be doing) and you push to a public repository, its no longer a good idea to store API keys in your source code files as they can be seen by anybody.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://tomeaton.uk/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://tomeaton.uk/blog/" rel="alternate" type="text/html" /><updated>2017-10-25T18:46:17+02:00</updated><id>http://tomeaton.uk/blog/</id><title type="html">Tom Eaton’s Weblog.</title><subtitle>Tom Eaton's Weblog. Random technical articles on things that I find interesting.</subtitle><entry><title type="html">Managing dotfiles with GNU stow</title><link href="http://tomeaton.uk/blog/jekyll/update/2017/10/25/Managing-dotfiles-with-GNU-stow.html" rel="alternate" type="text/html" title="Managing dotfiles with GNU stow" /><published>2017-10-25T17:00:00+02:00</published><updated>2017-10-25T17:00:00+02:00</updated><id>http://tomeaton.uk/blog/jekyll/update/2017/10/25/Managing-dotfiles-with-GNU-stow</id><content type="html" xml:base="http://tomeaton.uk/blog/jekyll/update/2017/10/25/Managing-dotfiles-with-GNU-stow.html">&lt;h2 id=&quot;i3wm&quot;&gt;i3wm&lt;/h2&gt;
+&lt;p&gt;I recently switched to the i3 window manager, which is a tiling window manager for Linux. &lt;img src=&quot;http://tomeaton.uk/blog/assets/i3demo.png&quot; alt=&quot;i3 demo&quot; /&gt; Is an example of how it automatically tiles the windows. For a great demonstration of how beautiful you can get i3 to look visit the Reddit community &lt;a href=&quot;https://reddit.com/r/unixporn&quot;&gt;https://reddit.com/r/unixporn&lt;/a&gt;. &lt;em&gt;Don’t worry, its safe for work!&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dotfiles&quot;&gt;Dotfiles&lt;/h2&gt;
+&lt;p&gt;When working with i3, and the other programs which store their configuration in dotfiles, it is a good idea to backup your dotfiles so in the case of an emergency you haven’t lost your configuration (trust me, you get very attached to it!). It is also helpful when you want to reinstall your configuration on another machine, so you don’t have to manually copy over every file.&lt;/p&gt;
+
+&lt;p&gt;If you want a configuration similar to mine, my dotfiles can be found &lt;a href=&quot;https://github.com/tomeaton17/dotfiles&quot;&gt;on my Github page.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;gnu-stow&quot;&gt;GNU stow&lt;/h2&gt;
+&lt;p&gt;According to the project page GNU stow is&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;GNU Stow is a symlink farm manager which takes distinct packages of software and/or data located in separate directories on the filesystem, and makes them appear to be installed in the same place.
+This may sound complicated, but essentially it allows you to collect files in one folder and install them to their required location with a single command.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;how-to-use-it&quot;&gt;How to use it&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Install GNU stow
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt install stow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create a directory to store all your dotfiles in
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir dotfiles
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;dotfiles
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;I would recommend backing this folder up with a version control system, e.g &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; and storing on github.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create a folder named the program whose configuration files you want to install. For this example I will install vim’s config file
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir vim
+cd vim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;The directory now looks like this&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotfiles
+└── vim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Move the configuration file into the directory you just made
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv ~/.vimrc &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;Directory now looks like this&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotfiles
+└── vim
+    └── .vimrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Install the configuration file back to its correct location. Must be done from root directory, dotfiles in this case.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;stow vim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;All the files inside of the &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; folder will now be moved to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For more complex configuration files which aren’t just inside &lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt; you must add the folders inside the directory. For example with the i3 config is stored at &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.config/i3/config&lt;/code&gt;. When making a new directory inside &lt;code class=&quot;highlighter-rouge&quot;&gt;dotfiles&lt;/code&gt; imagine it is the home directory. So to create a folder to install the i3 config the directory structure would now look like this&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotfiles
+└── vim
+       └── .vimrc
+    i3
+       └── .config
+           └── i3
+              ├── config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So I hope you now know how to use GNU stow to manage your dotfiles!&lt;/p&gt;</content><author><name></name></author><summary type="html">i3wm I recently switched to the i3 window manager, which is a tiling window manager for Linux. Is an example of how it automatically tiles the windows. For a great demonstration of how beautiful you can get i3 to look visit the Reddit community https://reddit.com/r/unixporn. Don’t worry, its safe for work!</summary></entry><entry><title type="html">Environment variables with Python</title><link href="http://tomeaton.uk/blog/jekyll/update/2017/10/20/Environment-variables-with-Python.html" rel="alternate" type="text/html" title="Environment variables with Python" /><published>2017-10-20T11:56:35+02:00</published><updated>2017-10-20T11:56:35+02:00</updated><id>http://tomeaton.uk/blog/jekyll/update/2017/10/20/Environment-variables-with-Python</id><content type="html" xml:base="http://tomeaton.uk/blog/jekyll/update/2017/10/20/Environment-variables-with-Python.html">&lt;p&gt;When working with APIs, an ‘API token’ or ‘key’ is often required to use the API. If you are working with these files locally this is not an issue, as long as your machine is secure. However, if you are using a version control system like &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; (which you should be doing) and you push to a public repository, its no longer a good idea to store API keys in your source code files as they can be seen by anybody.&lt;/p&gt;
 
 &lt;p&gt;I came across this issue when working on &lt;a href=&quot;https://github.com/tomeaton17/urban-enigma&quot;&gt;urban-enigma&lt;/a&gt;, which is machine learning project which trys to predict the location where a picture was taken. It is trained on Instagram pictures that are geotagged. I realised that I did not want to store my secret API keys on a public repository, so enivronment variables came to the rescue.&lt;/p&gt;
 
